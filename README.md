@@ -28,9 +28,21 @@ that allows for easy and efficient calculation of these moments,
 researchers can save time and reduce the potential for errors in their
 analyses.
 
+## Key Features
+- **Accurate Calculations**: Precisely computes Community-Weighted Mean (CWM), Variance (CWV), Skewness (CWS), and Excess Kurtosis (CWK) following robust methodologies established in trait scaling literature (*Wieczynski et al. 2019*, *Enquist et al. 2015*, *Šímová et al. 2018*, *Metcalfe et al. 2020*).
+- **Robust `NA` Handling**: Statistically accurate scaling that properly omits missing trait records from both numerators and denominators.
+- **Tidyverse-ready**: Fully designed around `dplyr` principles supporting unquoted column names (tidy evaluation).
+- **Semantic Feedback**: Implements user-friendly error messaging using standard `cli` formatting.
+
 ## Installation
 
-You can install the development version of ttmoment like so:
+You can install the released version of ttmoment from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("ttmoment")
+```
+
+And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 pak::pak("PaulESantos/ttmoment")
@@ -38,25 +50,41 @@ pak::pak("PaulESantos/ttmoment")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a realistic example demonstrating how to calculate functional moments for an ecological dataset containing multiple traits, communities, and species abundances:
 
-``` r
+```r
 library(ttmoment)
-#> This is ttmoment 0.0.0.9
-#Data
-df <- data.frame(trait = c("height", "height", "weight", "weight"),
-                 trait_value = c(5, 10, 15, 12),
-                 abundancia = c(1, 2, 1, 3),
-                 comm = c("A", "A", "B", "B"))
-#Function                          
- tidy_calc_moment(df, 
-                  trait_names = trait,
-                  comm_names = comm,
-                  trait_value = trait_value,
-                  weight = abundancia)
-#> # A tibble: 2 × 6
-#>   trait  comm    cwm   cwv    cws    cwk
-#>   <chr>  <chr> <dbl> <dbl>  <dbl>  <dbl>
-#> 1 height A      8.33  5.56 -0.707 -1.50 
-#> 2 weight B     12.8   1.69  1.15  -0.667
+library(dplyr)
+set.seed(42)
+
+# 1. Simulate a trait database (e.g., Specific Leaf Area and Wood Density for 10 species)
+species_traits <- expand.grid(
+  species = paste0("sp_", 1:10),
+  trait = c("SLA", "Wood_Density"),
+  stringsAsFactors = FALSE
+) |> 
+  mutate(trait_value = runif(n(), min = 5, max = 100))
+
+# 2. Simulate a community survey (abundances across 3 different sites)
+community_survey <- expand.grid(
+  comm = c("Forest_A", "Forest_B", "Grassland_C"),
+  species = paste0("sp_", 1:10),
+  stringsAsFactors = FALSE
+) |> 
+  mutate(abundance = rpois(n(), lambda = 25)) |> 
+  sample_frac(0.8) # Introduce missing species realistically
+
+# 3. Join the traits with the community abundances
+ecological_data <- inner_join(community_survey, species_traits, by = "species")
+
+# 4. Calculate the 4 community-weighted moments simultaneously
+trait_moments <- tidy_calc_moment(
+  df = ecological_data, 
+  trait_names = trait,
+  comm_names = comm,
+  trait_value = trait_value,
+  weight = abundance
+)
+
+print(trait_moments)
 ```

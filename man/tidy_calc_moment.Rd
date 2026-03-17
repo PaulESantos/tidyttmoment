@@ -9,19 +9,21 @@ tidy_calc_moment(df, trait_names, comm_names, trait_value, weight)
 \arguments{
 \item{df}{A data frame containing the trait and community data.}
 
-\item{trait_names}{Trait id column}
+\item{trait_names}{Unquoted column name containing the trait IDs.}
 
-\item{comm_names}{Community names column}
+\item{comm_names}{Unquoted column name containing the community names/IDs.}
 
-\item{trait_value}{Trait values column}
+\item{trait_value}{Unquoted column name containing the actual trait values.}
 
-\item{weight}{Column variable used to weight the trait values}
+\item{weight}{Unquoted column name containing the variable used to weight the trait values (e.g. abundance).}
 }
 \value{
-Returns a data frame with the columns comm, trait, cwm, cwv, cws, and cwk.
+Returns a tibble with the columns comm, trait, cwm (mean), cwv (variance), cws (skewness), and cwk (excess kurtosis).
 }
 \description{
-Calculates the community weighted mean, variance, skewness, and kurtosis of a given trait.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+Calculates the community weighted mean, variance, skewness, and excess kurtosis of a given trait based on the moments described in Wieczynski et al. (2019).
 }
 \examples{
 df <- data.frame(trait = c("height", "height", "weight", "weight"),
@@ -33,4 +35,17 @@ trait_names = trait,
 comm_names = comm,
 trait_value = trait_value,
 weight = abundancia)
+}
+\references{
+Enquist, B. J., Norberg, J., Bonser, S. P., Violle, C., Webb, C. T., Henderson, A., ... & Savage, V. M. (2015).
+Scaling from traits to ecosystems. \emph{Advances in Ecological Research}, 52, 249-318.
+
+Metcalfe, R. J., Ozturk, M., & Pouteau, R. (2020).
+Using functional traits to model annual plant community dynamics. \emph{Ecology}.
+
+\enc{Šímová}{Simova}, I., Violle, C., Kraft, N. J., Storch, D., Svenning, J. C., Gallagher, R. V., ... & Enquist, B. J. (2018).
+Spatial patterns and climate relationships of major plant traits in the New World differ between woody and herbaceous species. \emph{Global Ecology and Biogeography}, 27(8), 895-916.
+
+Wieczynski, D. J., Boyle, B., Buzzard, V., Duran, S. M., Henderson, A. N., Hulshof, C. M., ... & Savage, V. M. (2019).
+Climate shapes and shifts functional biodiversity in forests worldwide. \emph{Proceedings of the National Academy of Sciences}, 116(2), 587-592.
 }

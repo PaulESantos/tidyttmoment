@@ -1,12 +1,12 @@
 Package: ttmoment
 Title: Functional Trait Moment Calculation 
-Version: 0.0.0.9
+Version: 0.0.5
 Authors@R: c(
     person("Paul", "Santos Andrade", , "paulefrens@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-6635-0375")),
     person("Macroecology Lab", role = c("cph", "fnd"))
            )
-Description: Calculates the community four ‘moments’(mean, variance, skewness, and kurtosis), useful in characterizing the distribution of traits in a community.
+Description: Calculates the community four ‘moments’(mean, variance, skewness, and kurtosis) of a given trait based on the moments described in Wieczynski et al. (2019) <doi:10.1073/pnas.1813723116>. These functional metrics are extremely useful in characterizing the distribution of traits in a plant community. Evaluating these community-weighted moments allows researchers to evaluate shifts in optimal phenotypes and understand the effect of selection and ecological filtering across various environments with exactness.
 License: MIT + file LICENSE
 Suggests: 
     covr,
@@ -14,9 +14,11 @@ Suggests:
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.3
 URL: https://github.com/PaulESantos/ttmoment,
     https://paulesantos.github.io/ttmoment/
 BugReports: https://github.com/PaulESantos/ttmoment/issues
 Imports: 
-    dplyr
+    cli,
+    dplyr,
+    lifecycle
