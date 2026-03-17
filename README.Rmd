@@ -48,7 +48,7 @@ pak::pak("PaulESantos/ttmoment")
 
 This is a realistic example demonstrating how to calculate functional moments for an ecological dataset containing multiple traits, communities, and species abundances:
 
-```r
+```{r}
 library(ttmoment)
 library(dplyr)
 set.seed(42)
@@ -71,7 +71,8 @@ community_survey <- expand.grid(
   sample_frac(0.8) # Introduce missing species realistically
 
 # 3. Join the traits with the community abundances
-ecological_data <- inner_join(community_survey, species_traits, by = "species")
+ecological_data <- inner_join(community_survey, species_traits, 
+                              by = "species", relationship = "many-to-many")
 
 # 4. Calculate the 4 community-weighted moments simultaneously
 trait_moments <- tidy_calc_moment(

@@ -29,14 +29,23 @@ researchers can save time and reduce the potential for errors in their
 analyses.
 
 ## Key Features
-- **Accurate Calculations**: Precisely computes Community-Weighted Mean (CWM), Variance (CWV), Skewness (CWS), and Excess Kurtosis (CWK) following robust methodologies established in trait scaling literature (*Wieczynski et al. 2019*, *Enquist et al. 2015*, *Šímová et al. 2018*, *Metcalfe et al. 2020*).
-- **Robust `NA` Handling**: Statistically accurate scaling that properly omits missing trait records from both numerators and denominators.
-- **Tidyverse-ready**: Fully designed around `dplyr` principles supporting unquoted column names (tidy evaluation).
-- **Semantic Feedback**: Implements user-friendly error messaging using standard `cli` formatting.
+
+- **Accurate Calculations**: Precisely computes Community-Weighted Mean
+  (CWM), Variance (CWV), Skewness (CWS), and Excess Kurtosis (CWK)
+  following robust methodologies established in trait scaling literature
+  (*Wieczynski et al. 2019*, *Enquist et al. 2015*, *Šímová et
+  al. 2018*, *Metcalfe et al. 2020*).
+- **Robust `NA` Handling**: Statistically accurate scaling that properly
+  omits missing trait records from both numerators and denominators.
+- **Tidyverse-ready**: Fully designed around `dplyr` principles
+  supporting unquoted column names (tidy evaluation).
+- **Semantic Feedback**: Implements user-friendly error messaging using
+  standard `cli` formatting.
 
 ## Installation
 
-You can install the released version of ttmoment from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of ttmoment from
+[CRAN](https://CRAN.R-project.org) with:
 
 ``` r
 install.packages("ttmoment")
@@ -50,11 +59,22 @@ pak::pak("PaulESantos/ttmoment")
 
 ## Example
 
-This is a realistic example demonstrating how to calculate functional moments for an ecological dataset containing multiple traits, communities, and species abundances:
+This is a realistic example demonstrating how to calculate functional
+moments for an ecological dataset containing multiple traits,
+communities, and species abundances:
 
-```r
+``` r
 library(ttmoment)
+#> This is ttmoment 0.0.5
 library(dplyr)
+#> 
+#> Adjuntando el paquete: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
 set.seed(42)
 
 # 1. Simulate a trait database (e.g., Specific Leaf Area and Wood Density for 10 species)
@@ -75,7 +95,8 @@ community_survey <- expand.grid(
   sample_frac(0.8) # Introduce missing species realistically
 
 # 3. Join the traits with the community abundances
-ecological_data <- inner_join(community_survey, species_traits, by = "species")
+ecological_data <- inner_join(community_survey, species_traits, 
+                              by = "species", relationship = "many-to-many")
 
 # 4. Calculate the 4 community-weighted moments simultaneously
 trait_moments <- tidy_calc_moment(
@@ -87,4 +108,13 @@ trait_moments <- tidy_calc_moment(
 )
 
 print(trait_moments)
+#> # A tibble: 6 × 6
+#>   trait        comm          cwm   cwv      cws    cwk
+#>   <chr>        <chr>       <dbl> <dbl>    <dbl>  <dbl>
+#> 1 SLA          Forest_A     68.6  626. -0.922   -0.475
+#> 2 SLA          Forest_B     71.2  406. -0.663   -0.595
+#> 3 SLA          Grassland_C  67.0  563. -0.825   -0.384
+#> 4 Wood_Density Forest_A     60.1  676.  0.00362 -1.05 
+#> 5 Wood_Density Forest_B     70.1  530. -0.138   -1.43 
+#> 6 Wood_Density Grassland_C  56.1  586.  0.114   -0.887
 ```
