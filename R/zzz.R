@@ -1,18 +1,22 @@
-
-.onAttach <- function(lib, pkg) {
-  packageStartupMessage("This is ttmoment ",
-                        utils::packageDescription("ttmoment",
-                                                  fields = "Version"
-                        ),
-                        appendLF = TRUE
-  )
+.onAttach <- function(libname, pkgname) {
+  needed <- core_unloaded()
+  if (length(needed) > 0) {
+    tidyttmoment_attach()
+    msg <- tidyttmoment_attach_message(needed)
+    if (!is.null(msg)) {
+      packageStartupMessage(msg)
+    }
+  } else {
+    packageStartupMessage(
+      paste0("tidyttmoment ", package_version_h("tidyttmoment"))
+    )
+  }
 }
-
 
 # -------------------------------------------------------------------------
 
 show_progress <- function() {
-  isTRUE(getOption("ttmoment.show_progress")) && # user disables progress bar
+  isTRUE(getOption("tidyttmoment.show_progress")) && # user disables progress bar
     interactive() # Not actively knitting a document
 }
 
@@ -20,11 +24,13 @@ show_progress <- function() {
 
 .onLoad <- function(libname, pkgname) {
   opt <- options()
-  opt_ttmoment <- list(
-    ttmoment.show_progress = TRUE
+  opt_tidyttmoment <- list(
+    tidyttmoment.show_progress = TRUE
   )
-  to_set <- !(names(opt_ttmoment) %in% names(opt))
-  if (any(to_set)) options(opt_ttmoment[to_set])
+  to_set <- !(names(opt_tidyttmoment) %in% names(opt))
+  if (any(to_set)) options(opt_tidyttmoment[to_set])
   invisible()
 }
 
+# -------------------------------------------------------------------------
+if(getRversion() >= "2.15.1") utils::globalVariables(c("distinctiveness", "Ui", "species", "val", "weight_val", ":="))

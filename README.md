@@ -1,17 +1,17 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ttmoment <a href='https://github.com/PaulESantos/ttmoment'><img src='man/figures/ttmoment.svg' align="right" height="250" width="220" /></a>
+# tidyttmoment <a href='https://github.com/PaulESantos/tidyttmoment'><img src='man/figures/tidyttmoment.svg' align="right" height="250" width="220" /></a>
 
 <!-- badges: start -->
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
-status](https://www.r-pkg.org/badges/version/ttmoment)](https://CRAN.R-project.org/package=ttmoment)
+status](https://www.r-pkg.org/badges/version/tidyttmoment)](https://CRAN.R-project.org/package=tidyttmoment)
 [![Codecov test
-coverage](https://codecov.io/gh/PaulESantos/ttmoment/branch/main/graph/badge.svg)](https://app.codecov.io/gh/PaulESantos/ttmoment?branch=main)
-[![R-CMD-check](https://github.com/PaulESantos/ttmoment/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PaulESantos/ttmoment/actions/workflows/R-CMD-check.yaml)
+coverage](https://codecov.io/gh/PaulESantos/tidyttmoment/branch/main/graph/badge.svg)](https://app.codecov.io/gh/PaulESantos/tidyttmoment?branch=main)
+[![R-CMD-check](https://github.com/PaulESantos/tidyttmoment/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PaulESantos/tidyttmoment/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 Functional traits are key characteristics of organisms that relate to
@@ -23,7 +23,7 @@ skewness, and kurtosis) is a standard approach to quantifying the shape
 and dispersion of the distribution. It has been widely used in
 ecological and evolutionary research. However, calculating these moments
 for functional traits in R currently has two objects which could be
-confusing for beginners users of R. By developing the ttmoment R library
+confusing for beginners users of R. By developing the tidyttmoment R library
 that allows for easy and efficient calculation of these moments,
 researchers can save time and reduce the potential for errors in their
 analyses.
@@ -44,17 +44,17 @@ analyses.
 
 ## Installation
 
-You can install the released version of ttmoment from
+You can install the released version of tidyttmoment from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("ttmoment")
+install.packages("tidyttmoment")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
-pak::pak("PaulESantos/ttmoment")
+pak::pak("PaulESantos/tidyttmoment")
 ```
 
 ## Example
@@ -64,8 +64,8 @@ moments for an ecological dataset containing multiple traits,
 communities, and species abundances:
 
 ``` r
-library(ttmoment)
-#> This is ttmoment 0.0.5
+library(tidyttmoment)
+#> This is tidyttmoment 0.0.5
 library(dplyr)
 #> 
 #> Adjuntando el paquete: 'dplyr'
@@ -117,4 +117,71 @@ print(trait_moments)
 #> 4 Wood_Density Forest_A     60.1  676.  0.00362 -1.05 
 #> 5 Wood_Density Forest_B     70.1  530. -0.138   -1.43 
 #> 6 Wood_Density Grassland_C  56.1  586.  0.114   -0.887
+```
+
+### Advanced Tidy Functional Indices
+
+`tidyttmoment` now provides tidy wrappers for the `fundiversity` and `funrar` packages, allowing you to compute advanced functional indices directly from your tidy long-format data.
+
+**1. Functional Diversity Indices**
+
+Calculate FDis, FRic, FEve, FDiv, and Rao's Q:
+
+``` r
+# Calculate FDis and Rao's Q for the SLA trait
+fd_indices <- tidy_calc_diversity(
+  df = ecological_data |> filter(trait == "SLA"),
+  comm_names = comm,
+  sp_names = species,
+  trait_names = trait,
+  trait_value = trait_value,
+  weight = abundance,
+  index = c("FDis", "RaoQ")
+)
+
+print(fd_indices)
+#> # A tibble: 3 × 3
+#>   comm         FDis     Q
+#>   <chr>       <dbl> <dbl>
+#> 1 Forest_A     18.7  18.7
+#> 2 Forest_B     14.5  14.5
+#> 3 Grassland_C  17.7  17.7
+```
+
+**2. Functional Rarity Indices**
+
+Calculate Functional Distinctiveness and Uniqueness:
+
+``` r
+# Computes distinctiveness (by community) and uniqueness (by species)
+rarity_indices <- tidy_calc_rarity(
+  df = ecological_data |> filter(trait == "SLA"),
+  comm_names = comm,
+  sp_names = species,
+  trait_names = trait,
+  trait_value = trait_value,
+  weight = abundance
+)
+
+# Community-level distinctiveness (first 5 rows)
+print(head(rarity_indices$distinctiveness, 5))
+#> # A tibble: 5 × 3
+#>   comm     species distinctiveness
+#>   <chr>    <chr>             <dbl>
+#> 1 Forest_A sp_1              0.266
+#> 2 Forest_A sp_10             0.730
+#> 3 Forest_A sp_3              0.871
+#> 4 Forest_A sp_4              0.315
+#> 5 Forest_A sp_5              0.993
+
+# Species-level uniqueness (first 5 rows)
+print(head(rarity_indices$uniqueness, 5))
+#> # A tibble: 5 × 2
+#>   species uniqueness
+#>   <chr>        <dbl>
+#> 1 sp_1         0.203
+#> 2 sp_10        0.135
+#> 3 sp_2         0.334
+#> 4 sp_3         0.461
+#> 5 sp_4         0.135
 ```

@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
 library(testthat)
-library(ttmoment)
+library(tidyttmoment)
 
-testthat::test_check("ttmoment")
+testthat::test_check("tidyttmoment")

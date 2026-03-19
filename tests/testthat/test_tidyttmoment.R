@@ -14,7 +14,7 @@ testthat::test_that("tidy_calc_moment returns the correct output", {
                                 cwk = c(-3, -3))
 
   # Calculate the actual output
-  actual_output <- ttmoment::tidy_calc_moment(df,
+  actual_output <- tidyttmoment::tidy_calc_moment(df,
                                     trait_names = trait_names,
                                     comm_names = comm_names,
                                     trait_value = trait_value,
