@@ -23,8 +23,8 @@ skewness, and kurtosis) is a standard approach to quantifying the shape
 and dispersion of the distribution. It has been widely used in
 ecological and evolutionary research. However, calculating these moments
 for functional traits in R currently has two objects which could be
-confusing for beginners users of R. By developing the tidyttmoment R library
-that allows for easy and efficient calculation of these moments,
+confusing for beginners users of R. By developing the tidyttmoment R
+library that allows for easy and efficient calculation of these moments,
 researchers can save time and reduce the potential for errors in their
 analyses.
 
@@ -44,14 +44,8 @@ analyses.
 
 ## Installation
 
-You can install the released version of tidyttmoment from
-[CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("tidyttmoment")
-```
-
-And the development version from [GitHub](https://github.com/) with:
+You can install the development version from
+[GitHub](https://github.com/) with:
 
 ``` r
 pak::pak("PaulESantos/tidyttmoment")
@@ -65,7 +59,8 @@ communities, and species abundances:
 
 ``` r
 library(tidyttmoment)
-#> This is tidyttmoment 0.0.5
+#> ── Attaching tidyttmoment package ──────────────────────── tidyttmoment 0.0.5 ──
+#> ✔ fundiversity 1.1.1     ✔ funrar       1.5.0
 library(dplyr)
 #> 
 #> Adjuntando el paquete: 'dplyr'
@@ -121,11 +116,13 @@ print(trait_moments)
 
 ### Advanced Tidy Functional Indices
 
-`tidyttmoment` now provides tidy wrappers for the `fundiversity` and `funrar` packages, allowing you to compute advanced functional indices directly from your tidy long-format data.
+`tidyttmoment` now provides tidy wrappers for the `fundiversity` and
+`funrar` packages, allowing you to compute advanced functional indices
+directly from your tidy long-format data.
 
 **1. Functional Diversity Indices**
 
-Calculate FDis, FRic, FEve, FDiv, and Rao's Q:
+Calculate FDis, FRic, FEve, FDiv, and Rao’s Q:
 
 ``` r
 # Calculate FDis and Rao's Q for the SLA trait
@@ -143,9 +140,9 @@ print(fd_indices)
 #> # A tibble: 3 × 3
 #>   comm         FDis     Q
 #>   <chr>       <dbl> <dbl>
-#> 1 Forest_A     18.7  18.7
-#> 2 Forest_B     14.5  14.5
-#> 3 Grassland_C  17.7  17.7
+#> 1 Forest_A     19.8  26.6
+#> 2 Forest_B     16.3  22.2
+#> 3 Grassland_C  18.4  25.8
 ```
 
 **2. Functional Rarity Indices**
@@ -168,20 +165,20 @@ print(head(rarity_indices$distinctiveness, 5))
 #> # A tibble: 5 × 3
 #>   comm     species distinctiveness
 #>   <chr>    <chr>             <dbl>
-#> 1 Forest_A sp_1              0.266
-#> 2 Forest_A sp_10             0.730
-#> 3 Forest_A sp_3              0.871
-#> 4 Forest_A sp_4              0.315
-#> 5 Forest_A sp_5              0.993
+#> 1 Forest_A sp_1              1.13 
+#> 2 Forest_A sp_10             0.876
+#> 3 Forest_A sp_2              1.20 
+#> 4 Forest_A sp_3              1.82 
+#> 5 Forest_A sp_4              0.929
 
 # Species-level uniqueness (first 5 rows)
 print(head(rarity_indices$uniqueness, 5))
 #> # A tibble: 5 × 2
 #>   species uniqueness
 #>   <chr>        <dbl>
-#> 1 sp_1         0.203
-#> 2 sp_10        0.135
-#> 3 sp_2         0.334
-#> 4 sp_3         0.461
-#> 5 sp_4         0.135
+#> 1 sp_1        0.0856
+#> 2 sp_10       0.121 
+#> 3 sp_2        0.0856
+#> 4 sp_3        0.582 
+#> 5 sp_4        0.324
 ```
