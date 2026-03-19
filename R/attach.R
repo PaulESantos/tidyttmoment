@@ -1,6 +1,4 @@
 core <- c(
-  "dplyr",
-  "tidyr",
   "fundiversity",
   "funrar"
 )
@@ -32,7 +30,7 @@ tidyttmoment_attach_message <- function(to_load) {
   }
 
   header <- cli::rule(
-    left = cli::style_bold("Attaching core tidyttmoment packages"),
+    left = cli::style_bold("Attaching tidyttmoment package"),
     right = paste0("tidyttmoment ", package_version_h("tidyttmoment"))
   )
 
