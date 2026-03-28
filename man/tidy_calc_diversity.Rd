@@ -33,7 +33,7 @@ tidy_calc_diversity(
 A tibble with community coordinates and the selected functional diversity indices.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
 Wraps the \code{fundiversity} package to calculate functional diversity indices
 (FRic, FDiv, FEve, FDis, Rao's Q) directly from a tidy long-format data frame.

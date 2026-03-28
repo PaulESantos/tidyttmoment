@@ -5,102 +5,202 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Calculates the community four ‘moments’(mean, variance, skewness, and kurtosis), useful in characterizing the distribution of traits in a community.">
-<title>Functional Trait Moment Calculation  • ttmoment</title>
+<title>tidyttmoment • tidyttmoment</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Functional Trait Moment Calculation ">
-<meta property="og:description" content="Calculates the community four ‘moments’(mean, variance, skewness, and kurtosis), useful in characterizing the distribution of traits in a community.">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
+<meta property="og:title" content="tidyttmoment">
+<meta name="description" content="Tidy helpers for community-weighted moments, functional diversity, and rarity metrics.">
+<meta property="og:description" content="Tidy helpers for community-weighted moments, functional diversity, and rarity metrics.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
-    
-    <a class="navbar-brand me-2" href="index.html">ttmoment</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9</small>
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
-    
+    <a class="navbar-brand me-2" href="index.html">tidyttmoment</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5</small>
+
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="reference/index.html">Reference</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/PaulESantos/ttmoment/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/PaulESantos/tidyttmoment/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="ttmoment-">ttmoment <a href="https://github.com/PaulESantos/ttmoment" class="external-link"><img src="reference/figures/logo_ttmoment.jpg" align="right" height="220" width="250"></a>
-<a class="anchor" aria-label="anchor" href="#ttmoment-"></a>
+<div class="page-header"><h1 id="tidyttmoment-">tidyttmoment <a href="https://github.com/PaulESantos/tidyttmoment" class="external-link"><img src="reference/figures/tidyttmoment.svg" align="right" height="250" width="220"></a>
+<a class="anchor" aria-label="anchor" href="#tidyttmoment-"></a>
 </h1></div>
 <!-- badges: start -->
 
-<p>Functional traits are key characteristics of organisms that relate to their performance, ecology, and evolution. The distribution of functional traits can provide important insights into the functioning of ecosystems and the responses of organisms to environmental change. Evaluating the moments of this distribution (i.e., mean, variance, skewness, and kurtosis) is a standard approach to quantifying the shape and dispersion of the distribution. It has been widely used in ecological and evolutionary research. However, calculating these moments for functional traits in R currently has two objects which could be confusing for beginners users of R. By developing the ttmoment R library that allows for easy and efficient calculation of these moments, researchers can save time and reduce the potential for errors in their analyses.</p>
+<p>Functional traits are key characteristics of organisms that relate to their performance, ecology, and evolution. The distribution of functional traits can provide important insights into the functioning of ecosystems and the responses of organisms to environmental change. Evaluating the moments of this distribution (i.e., mean, variance, skewness, and kurtosis) is a standard approach to quantifying the shape and dispersion of the distribution. It has been widely used in ecological and evolutionary research. However, calculating these moments for functional traits in R currently has two objects which could be confusing for beginners users of R. By developing the tidyttmoment R library that allows for easy and efficient calculation of these moments, researchers can save time and reduce the potential for errors in their analyses.</p>
+<div class="section level2">
+<h2 id="key-features">Key Features<a class="anchor" aria-label="anchor" href="#key-features"></a>
+</h2>
+<ul>
+<li>
+<strong>Accurate Calculations</strong>: Precisely computes Community-Weighted Mean (CWM), Variance (CWV), Skewness (CWS), and Excess Kurtosis (CWK) following robust methodologies established in trait scaling literature (<em>Wieczynski et al. 2019</em>, <em>Enquist et al. 2015</em>, <em>Šímová et al. 2018</em>, <em>Metcalfe et al. 2020</em>).</li>
+<li>
+<strong>Robust <code>NA</code> Handling</strong>: Statistically accurate scaling that properly omits missing trait records from both numerators and denominators.</li>
+<li>
+<strong>Tidyverse-ready</strong>: Fully designed around <code>dplyr</code> principles supporting unquoted column names (tidy evaluation).</li>
+<li>
+<strong>Semantic Feedback</strong>: Implements user-friendly error messaging using standard <code>cli</code> formatting.</li>
+</ul>
+</div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of ttmoment like so:</p>
+<p>You can install the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"PaulESantos/ttmoment"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"PaulESantos/tidyttmoment"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>This is a basic example which shows you how to solve a common problem:</p>
+<p>This is a realistic example demonstrating how to calculate functional moments for an ecological dataset containing multiple traits, communities, and species abundances:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/PaulESantos/ttmoment" class="external-link">ttmoment</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; This is ttmoment 0.0.0.9</span></span>
-<span><span class="co">#Data</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>trait <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"height"</span>, <span class="st">"height"</span>, <span class="st">"weight"</span>, <span class="st">"weight"</span><span class="op">)</span>,</span>
-<span>                 trait_value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">15</span>, <span class="fl">12</span><span class="op">)</span>,</span>
-<span>                 abundancia <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>,</span>
-<span>                 comm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"B"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#Function                          </span></span>
-<span> <span class="fu"><a href="reference/tidy_calc_moment.html">tidy_calc_moment</a></span><span class="op">(</span><span class="va">df</span>, </span>
-<span>                  trait_names <span class="op">=</span> <span class="va">trait</span>,</span>
-<span>                  comm_names <span class="op">=</span> <span class="va">comm</span>,</span>
-<span>                  trait_value <span class="op">=</span> <span class="va">trait_value</span>,</span>
-<span>                  weight <span class="op">=</span> <span class="va">abundancia</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 2 × 6</span></span>
-<span><span class="co">#&gt;   trait  comm    cwm   cwv    cws    cwk</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 height A      8.33  5.56 -0.707 -1.50 </span></span>
-<span><span class="co">#&gt; 2 weight B     12.8   1.69  1.15  -0.667</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/PaulESantos/tidyttmoment" class="external-link">tidyttmoment</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; ── Attaching tidyttmoment package ──────────────────────── tidyttmoment 0.0.5 ──</span></span>
+<span><span class="co">#&gt; ✔ fundiversity 1.1.1     ✔ funrar       1.5.0</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Adjuntando el paquete: 'dplyr'</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     filter, lag</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 1. Simulate a trait database (e.g., Specific Leaf Area and Wood Density for 10 species)</span></span>
+<span><span class="va">species_traits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span></span>
+<span>  species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"sp_"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>,</span>
+<span>  trait <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SLA"</span>, <span class="st">"Wood_Density"</span><span class="op">)</span>,</span>
+<span>  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>trait_value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>, min <span class="op">=</span> <span class="fl">5</span>, max <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 2. Simulate a community survey (abundances across 3 different sites)</span></span>
+<span><span class="va">community_survey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span></span>
+<span>  comm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Forest_A"</span>, <span class="st">"Forest_B"</span>, <span class="st">"Grassland_C"</span><span class="op">)</span>,</span>
+<span>  species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"sp_"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>,</span>
+<span>  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>abundance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fl">25</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html" class="external-link">sample_frac</a></span><span class="op">(</span><span class="fl">0.8</span><span class="op">)</span> <span class="co"># Introduce missing species realistically</span></span>
+<span></span>
+<span><span class="co"># 3. Join the traits with the community abundances</span></span>
+<span><span class="va">ecological_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">inner_join</a></span><span class="op">(</span><span class="va">community_survey</span>, <span class="va">species_traits</span>, </span>
+<span>                              by <span class="op">=</span> <span class="st">"species"</span>, relationship <span class="op">=</span> <span class="st">"many-to-many"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 4. Calculate the 4 community-weighted moments simultaneously</span></span>
+<span><span class="va">trait_moments</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tidy_calc_moment.html">tidy_calc_moment</a></span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">ecological_data</span>, </span>
+<span>  trait_names <span class="op">=</span> <span class="va">trait</span>,</span>
+<span>  comm_names <span class="op">=</span> <span class="va">comm</span>,</span>
+<span>  trait_value <span class="op">=</span> <span class="va">trait_value</span>,</span>
+<span>  weight <span class="op">=</span> <span class="va">abundance</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">trait_moments</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 6</span></span>
+<span><span class="co">#&gt;   trait        comm          cwm   cwv      cws    cwk</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 SLA          Forest_A     68.6  626. -0.922   -0.475</span></span>
+<span><span class="co">#&gt; 2 SLA          Forest_B     71.2  406. -0.663   -0.595</span></span>
+<span><span class="co">#&gt; 3 SLA          Grassland_C  67.0  563. -0.825   -0.384</span></span>
+<span><span class="co">#&gt; 4 Wood_Density Forest_A     60.1  676.  0.00362 -1.05 </span></span>
+<span><span class="co">#&gt; 5 Wood_Density Forest_B     70.1  530. -0.138   -1.43 </span></span>
+<span><span class="co">#&gt; 6 Wood_Density Grassland_C  56.1  586.  0.114   -0.887</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="advanced-tidy-functional-indices">Advanced Tidy Functional Indices<a class="anchor" aria-label="anchor" href="#advanced-tidy-functional-indices"></a>
+</h3>
+<p><code>tidyttmoment</code> now provides tidy wrappers for the <code>fundiversity</code> and <code>funrar</code> packages, allowing you to compute advanced functional indices directly from your tidy long-format data.</p>
+<p><strong>1. Functional Diversity Indices</strong></p>
+<p>Calculate FDis, FRic, FEve, FDiv, and Rao’s Q:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Calculate FDis and Rao's Q for the SLA trait</span></span>
+<span><span class="va">fd_indices</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tidy_calc_diversity.html">tidy_calc_diversity</a></span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">ecological_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">trait</span> <span class="op">==</span> <span class="st">"SLA"</span><span class="op">)</span>,</span>
+<span>  comm_names <span class="op">=</span> <span class="va">comm</span>,</span>
+<span>  sp_names <span class="op">=</span> <span class="va">species</span>,</span>
+<span>  trait_names <span class="op">=</span> <span class="va">trait</span>,</span>
+<span>  trait_value <span class="op">=</span> <span class="va">trait_value</span>,</span>
+<span>  weight <span class="op">=</span> <span class="va">abundance</span>,</span>
+<span>  index <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"FDis"</span>, <span class="st">"RaoQ"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">fd_indices</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 3 × 3</span></span>
+<span><span class="co">#&gt;   comm         FDis     Q</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 Forest_A     19.8  26.6</span></span>
+<span><span class="co">#&gt; 2 Forest_B     16.3  22.2</span></span>
+<span><span class="co">#&gt; 3 Grassland_C  18.4  25.8</span></span></code></pre></div>
+<p><strong>2. Functional Rarity Indices</strong></p>
+<p>Calculate Functional Distinctiveness and Uniqueness:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Computes distinctiveness (by community) and uniqueness (by species)</span></span>
+<span><span class="va">rarity_indices</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tidy_calc_rarity.html">tidy_calc_rarity</a></span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">ecological_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">trait</span> <span class="op">==</span> <span class="st">"SLA"</span><span class="op">)</span>,</span>
+<span>  comm_names <span class="op">=</span> <span class="va">comm</span>,</span>
+<span>  sp_names <span class="op">=</span> <span class="va">species</span>,</span>
+<span>  trait_names <span class="op">=</span> <span class="va">trait</span>,</span>
+<span>  trait_value <span class="op">=</span> <span class="va">trait_value</span>,</span>
+<span>  weight <span class="op">=</span> <span class="va">abundance</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Community-level distinctiveness (first 5 rows)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">rarity_indices</span><span class="op">$</span><span class="va">distinctiveness</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 5 × 3</span></span>
+<span><span class="co">#&gt;   comm     species distinctiveness</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;             &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 Forest_A sp_1              1.13 </span></span>
+<span><span class="co">#&gt; 2 Forest_A sp_10             0.876</span></span>
+<span><span class="co">#&gt; 3 Forest_A sp_2              1.20 </span></span>
+<span><span class="co">#&gt; 4 Forest_A sp_3              1.82 </span></span>
+<span><span class="co">#&gt; 5 Forest_A sp_4              0.929</span></span>
+<span></span>
+<span><span class="co"># Species-level uniqueness (first 5 rows)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">rarity_indices</span><span class="op">$</span><span class="va">uniqueness</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 5 × 2</span></span>
+<span><span class="co">#&gt;   species uniqueness</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;        &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 sp_1        0.0856</span></span>
+<span><span class="co">#&gt; 2 sp_10       0.121 </span></span>
+<span><span class="co">#&gt; 3 sp_2        0.0856</span></span>
+<span><span class="co">#&gt; 4 sp_3        0.582 </span></span>
+<span><span class="co">#&gt; 5 sp_4        0.324</span></span></code></pre></div>
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/PaulESantos/ttmoment/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/PaulESantos/ttmoment/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://cloud.r-project.org/package=tidyttmoment" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/PaulESantos/tidyttmoment/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/PaulESantos/tidyttmoment/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -124,25 +224,25 @@
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html#citation">Citing ttmoment</a></li>
+<li><a href="authors.html#citation">Citing tidyttmoment</a></li>
 </ul>
 </div>
 
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Paul Santos Andrade <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-6635-0375" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Macroecology Lab <br><small class="roles"> Copyright holder, funder </small>  </li>
+<li>Paul Efren Santos Andrade <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-6635-0375" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Macroecology Lab <br><small class="roles"> Copyright holder, funder </small>   </li>
 </ul>
 </div>
 
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://CRAN.R-project.org/package=ttmoment" class="external-link"><img src="https://www.r-pkg.org/badges/version/ttmoment" alt="CRAN status"></a></li>
-<li><a href="https://app.codecov.io/gh/PaulESantos/ttmoment?branch=main" class="external-link"><img src="https://codecov.io/gh/PaulESantos/ttmoment/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://github.com/PaulESantos/ttmoment/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/PaulESantos/ttmoment/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
+<li><a href="https://CRAN.R-project.org/package=tidyttmoment" class="external-link"><img src="https://www.r-pkg.org/badges/version/tidyttmoment" alt="CRAN status"></a></li>
+<li><a href="https://app.codecov.io/gh/PaulESantos/tidyttmoment?branch=main" class="external-link"><img src="https://codecov.io/gh/PaulESantos/tidyttmoment/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://github.com/PaulESantos/tidyttmoment/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/PaulESantos/tidyttmoment/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 
@@ -151,21 +251,19 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by Paul Santos Andrade, Macroecology Lab.</p>
+  <p>Developed by Paul Efren Santos Andrade, Macroecology Lab.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>

@@ -23,7 +23,7 @@ tidy_to_matrices(df, comm_names, sp_names, trait_names, trait_value, weight)
 A list containing \code{site_species} (a site by species matrix) and \code{species_traits} (a species by trait matrix).
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
 Helper function to pivot a tidy long-format data frame into a site-by-species abundance matrix
 and a species-by-trait matrix, which are required for indices like functional diversity and rarity.

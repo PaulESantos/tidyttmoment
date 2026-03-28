@@ -1,36 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://paulesantos.github.io/ttmoment/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://paulesantos.github.io/ttmoment/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://paulesantos.github.io/ttmoment/SUPPORT.html</loc>
-  </url>
-  <url>
-    <loc>https://paulesantos.github.io/ttmoment/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://paulesantos.github.io/ttmoment/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://paulesantos.github.io/ttmoment/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://paulesantos.github.io/ttmoment/index.html</loc>
-  </url>
-  <url>
-    <loc>https://paulesantos.github.io/ttmoment/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://paulesantos.github.io/ttmoment/reference/tidy_calc_moment.html</loc>
-  </url>
-  <url>
-    <loc>https://paulesantos.github.io/ttmoment/reference/ttmoment-package.html</loc>
-  </url>
-  <url>
-    <loc>https://paulesantos.github.io/ttmoment/404.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://paulesantos.github.io/tidyttmoment/404.html</loc></url>
+<url><loc>https://paulesantos.github.io/tidyttmoment/authors.html</loc></url>
+<url><loc>https://paulesantos.github.io/tidyttmoment/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://paulesantos.github.io/tidyttmoment/CONTRIBUTING.html</loc></url>
+<url><loc>https://paulesantos.github.io/tidyttmoment/index.html</loc></url>
+<url><loc>https://paulesantos.github.io/tidyttmoment/LICENSE-text.html</loc></url>
+<url><loc>https://paulesantos.github.io/tidyttmoment/LICENSE.html</loc></url>
+<url><loc>https://paulesantos.github.io/tidyttmoment/reference/index.html</loc></url>
+<url><loc>https://paulesantos.github.io/tidyttmoment/reference/tidyttmoment-package.html</loc></url>
+<url><loc>https://paulesantos.github.io/tidyttmoment/reference/tidy_calc_diversity.html</loc></url>
+<url><loc>https://paulesantos.github.io/tidyttmoment/reference/tidy_calc_moment.html</loc></url>
+<url><loc>https://paulesantos.github.io/tidyttmoment/reference/tidy_calc_rarity.html</loc></url>
+<url><loc>https://paulesantos.github.io/tidyttmoment/reference/tidy_to_matrices.html</loc></url>
+<url><loc>https://paulesantos.github.io/tidyttmoment/SUPPORT.html</loc></url>
 </urlset>
+

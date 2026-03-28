@@ -1,9 +1,29 @@
 destination: docs
 url: https://paulesantos.github.io/tidyttmoment/
+title: tidyttmoment
 
 authors:
   Paul E Santos Andrade:
     href: http://paulefrensa.rbind.io/
+
+home:
+  title: tidyttmoment
+  description: Tidy helpers for community-weighted moments, functional diversity, and rarity metrics.
+
+navbar:
+  structure:
+    left: [intro, reference]
+    right: [search, github]
+
+reference:
+  - title: Community-weighted moments
+    contents:
+      - tidy_calc_moment
+      - tidy_to_matrices
+  - title: Additional functional indices
+    contents:
+      - tidy_calc_diversity
+      - tidy_calc_rarity
 
 template:
   bootstrap: 5

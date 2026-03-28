@@ -1,6 +1,6 @@
 #' @title Calculate functional rarity indices from tidy data
 #' @description
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("stable")`
 #'
 #' Wraps the \code{funrar} package to calculate functional rarity indices 
 #' (Distinctiveness and Uniqueness) directly from a tidy long-format data frame.

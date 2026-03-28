@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 # tidyttmoment <a href='https://github.com/PaulESantos/tidyttmoment'><img src='man/figures/tidyttmoment.svg' align="right" height="250" width="220" /></a>
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![CRAN status](https://www.r-pkg.org/badges/version/tidyttmoment)](https://CRAN.R-project.org/package=tidyttmoment)
 [![Codecov test coverage](https://codecov.io/gh/PaulESantos/tidyttmoment/branch/main/graph/badge.svg)](https://app.codecov.io/gh/PaulESantos/tidyttmoment?branch=main)
 [![R-CMD-check](https://github.com/PaulESantos/tidyttmoment/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PaulESantos/tidyttmoment/actions/workflows/R-CMD-check.yaml)

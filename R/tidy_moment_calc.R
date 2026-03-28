@@ -1,6 +1,6 @@
 #' @title Calculate community weighted mean, variance, skewness, and kurtosis
 #' @description
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("stable")`
 #'
 #' Calculates the community weighted mean, variance, skewness, and excess kurtosis of a given trait based on the moments described in Wieczynski et al. (2019).
 #'

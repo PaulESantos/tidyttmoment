@@ -21,7 +21,7 @@ tidy_calc_moment(df, trait_names, comm_names, trait_value, weight)
 Returns a tibble with the columns comm, trait, cwm (mean), cwv (variance), cws (skewness), and cwk (excess kurtosis).
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
 Calculates the community weighted mean, variance, skewness, and excess kurtosis of a given trait based on the moments described in Wieczynski et al. (2019).
 }

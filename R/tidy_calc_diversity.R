@@ -1,6 +1,6 @@
 #' @title Calculate functional diversity indices from tidy data
 #' @description
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("stable")`
 #'
 #' Wraps the \code{fundiversity} package to calculate functional diversity indices 
 #' (FRic, FDiv, FEve, FDis, Rao's Q) directly from a tidy long-format data frame.

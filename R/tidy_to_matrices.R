@@ -1,6 +1,6 @@
 #' @title Convert tidy long data to community and trait matrices
 #' @description
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("stable")`
 #'
 #' Helper function to pivot a tidy long-format data frame into a site-by-species abundance matrix 
 #' and a species-by-trait matrix, which are required for indices like functional diversity and rarity.
